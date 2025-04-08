@@ -12,6 +12,6 @@ public class SearchDTO {
 	private int page;
 	private String searchCondition;
 	private String keyword;
-
+	private int boardNo;
 	
 }
