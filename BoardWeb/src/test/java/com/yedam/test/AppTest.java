@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
+import com.yedam.mapper.EventMapper;
 import com.yedam.mapper.ReplyMapper;
+import com.yedam.vo.EventVO;
 
 public class AppTest {
 	public static void main(String[] args) {
@@ -17,9 +19,9 @@ public class AppTest {
 		
 		
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
-		ReplyMapper mapper= sqlSession.getMapper(ReplyMapper.class);
+		EventMapper mapper= sqlSession.getMapper(EventMapper.class);
 		
-		List<Map<String,Object>> list= mapper.selectListForDT(103);
+		List<EventVO> list= mapper.selectEvent();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(list);
 		System.out.println(json);

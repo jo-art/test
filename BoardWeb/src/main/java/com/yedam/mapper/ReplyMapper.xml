@@ -13,12 +13,13 @@
 	from (select /*+INDEX_DESC(r reply_pk) */rownum rn ,r.*
     		from tbl_reply r
     		where board_no= #{boardNo}) b
-	where b.rn>(#{page}-1)*5
-	<![CDATA[
-	and b.rn<=#{page}*5
-	]]>
+	
 		
 	</select>
+	<!-- where b.rn>(#{page}-1)*5
+	<![CDATA[
+	and b.rn<=#{page}*5
+	]]> -->
 	<!-- 등록 -->
 	<insert id="insertReply" parameterType="reply">
 	<selectKey keyProperty ="replyNo" resultType="int" order="BEFORE">

@@ -12,30 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
-import com.yedam.service.ReplyService;
-import com.yedam.service.ReplyServiceImpl;
+import com.yedam.service.EtcService;
+import com.yedam.service.EtcServiceImpl;
+import com.yedam.vo.EventVO;
 
-public class RLDatatable implements Control {
+public class EventListControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//{"data":[[],[],[] ....[] ]}
-		
-		// 요청 인코딩 설정
-	    req.setCharacterEncoding("UTF-8");
+		// TODO Auto-generated method stub
+        
 	    
-	    // 응답 인코딩 설정
-	    resp.setContentType("application/json; charset=UTF-8");
 	    resp.setCharacterEncoding("UTF-8");
-	    
-		String bno = req.getParameter("bno");
-		ReplyService svc = new ReplyServiceImpl();
+
+		EtcService svc = new EtcServiceImpl();
 		
-		List<Map<String,Object>> list = svc.replyListForDT(Integer.parseInt(bno));
-		Map<String, Object> result = new HashMap<>();
-		result.put("data", list);
+		List<EventVO> list = svc.eventList();
+		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(result);
+		String json = gson.toJson(list);
 		resp.getWriter().print(json);
 	}
 
